@@ -7,26 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./dist/css/libs.min.css">
     <link rel="stylesheet" href="./dist/css/main.min.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/png">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+    <title>crm</title>
 </head>
 <body>
-<header>
-    <div class="uk-position-relative">
-        <img src="/img/header-bg.jpg" alt="Header background">
-        <div id="nav-container" class="uk-position-top"></div>
-    </div>
-</header>
-<main>
-    <section class="pizza uk-container">
-        <h2>Пицца</h2>
-        <ul class="pizza-list uk-child-width-1-2@m catalog-list" uk-grid></ul>
-    </section>
-    <section class="drinks uk-container">
-        <h2>Напитки</h2>
-        <ul class="drinks-list uk-child-width-1-2@m catalog-list" uk-grid></ul>
-    </section>
-    <script src="./dist/js/libs.min.js"></script>
-    <script src="./dist/js/index.min.js"></script>
+<main class="main-form">
+    <form>
+        <div class="form-group">
+            <input type="text" class="form-control" id="login" name="userName" placeholder="Логин">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="password" name="userPassword"
+                   placeholder="Пароль">
+        </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
 </main>
+<script src="./dist/js/libs.min.js"></script>
+<script src="./dist/js/index.min.js"></script>
 </body>
 </html>

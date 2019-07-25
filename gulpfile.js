@@ -66,7 +66,7 @@ function jsLibs() {
     return gulp
         .src([
             './node_modules/jquery/dist/jquery.min.js',
-            './node_modules/uikit/dist/js/uikit.min.js'
+            './node_modules/bootstrap/dist/js/bootstrap.min.js'
         ])
         .pipe(concat('libs.js'))
         .pipe(rename({ suffix: ".min" }))
@@ -77,7 +77,7 @@ function jsLibs() {
 function cssLibs() {
     return gulp
         .src([
-            './node_modules/uikit/dist/css/uikit.min.css',
+            './node_modules/bootstrap/dist/css/bootstrap.min.css',
         ])
         .pipe(concat('libs.css'))
         .pipe(plumber())
