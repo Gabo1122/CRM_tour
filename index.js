@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 
 let db = new jsonDb("./db/products", true, false);
 const app = express();
+const users = require('./lib/users');
 
 //Настройка выдачи статических файлов
 app.use('/dist', express.static('dist/'));
@@ -37,7 +38,10 @@ app.get('/contacts', function (req, res) {
     res.sendFile(path.join(__dirname + '/pages/contacts.html'));
 });
 
-
+app.get('/getUsers', (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(users));
+});
 
 app.get('/getProductsCount', (req, res, next) => {
     let products = (db.getData('/products'));

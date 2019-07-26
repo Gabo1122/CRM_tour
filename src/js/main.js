@@ -1,32 +1,3 @@
-
-let nav = [
-    {
-        text: 'Главная',
-        address: '/',
-        className: '',
-        wrapper: 'li',
-    },
-    {
-        text: 'О нас',
-        address: '/about',
-        className: '',
-        wrapper: 'li',
-    },
-    {
-        text: 'Контакты',
-        address: '/contacts',
-        className: '',
-        wrapper: 'li',
-    },
-    {
-        text: 'Корзина',
-        address: '#modal-example',
-        className: 'uk-text-danger open-modal-btn',
-        wrapper: 'li',
-        specAttr: 'uk-toggle'
-    }
-];
-
 let Image = function (classNames, src, alt) {
     this.classNames = classNames || '';
     this.src = src;
@@ -98,13 +69,9 @@ let List = function (id, className) {
 };
 
 window.onload = function () {
-    products.forEach(function (product) {
-        $('.pizza-list').append(new Card(product));
-    });
+    let login = new Login();
+    document.getElementsByTagName('body')[0].innerHTML = login.init();
+    console.log(document.getElementsByName('button'));
+    login.sendUserData();
 
-    drinks.forEach(function (drink) {
-        $('.drinks-list').append(new Card(drink));
-    });
-
-    $('#nav-container').append(new Nav(nav));
 };
