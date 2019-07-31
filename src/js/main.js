@@ -69,9 +69,17 @@ let List = function (id, className) {
 };
 
 window.onload = function () {
-    let login = new Login();
-    document.getElementsByTagName('body')[0].innerHTML = login.init();
-    console.log(document.getElementsByName('button'));
-    login.sendUserData();
+    let login = (new Login());
+    document.body.insertAdjacentHTML('afterbegin', login.init());
 
+    function checkDOMChange() {
+        if (document.getElementsByTagName('button')) {
+            login.sendUserData();
+            return;
+        }
+        setTimeout( checkDOMChange, 100 );
+    }
+
+    checkDOMChange();
 };
+

@@ -18,9 +18,34 @@ class Login {
         return this.template;
     }
     sendUserData() {
-        document.getElementsByName('button')[0].addEventListener("click", function (e) {
+        let submit = document.getElementsByTagName('button')[0];
+        submit.addEventListener("click", function (e) {
             e.preventDefault();
-            console.log(111);
+            let login = document.getElementById("login").value;
+            let pass = document.getElementById("password").value;
+            if (login && pass) {
+                let xhr = new XMLHttpRequest();
+                let data = JSON.stringify({login: login, pass: pass});
+                console.log(data);
+                xhr.open("POST", '/login', true);
+                xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+                xhr.onreadystatechange = function () {
+                    if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        if (JSON.parse(xhr.responseText) === 'ok') {
+                            document.getElementsByTagName('body')[0].innerHTML = '';
+                            document.body.insertAdjacentHTML('afterbegin', new Form().init());
+                        } else if (JSON.parse(xhr.responseText) === 'err') {
+                            alert('неправильный логин или пароль');
+                        } else {
+                            alert('ошибка сервера');
+                        }
+                    }
+                };
+                xhr.send(data);
+            } else {
+                alert("Введите логин и пароль")
+            }
+
         })
     }
 }

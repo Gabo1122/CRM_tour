@@ -3,10 +3,15 @@ const express = require('express');
 const path = require('path');
 const jsonDb = require('node-json-db').JsonDB;
 const bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+const crypto = require('crypto');
 
 let db = new jsonDb("./db/products", true, false);
+let usersDb = new jsonDb("./db/users", true, false);
 const app = express();
-const users = require('./lib/users');
+// const users = require('./lib/users');
+
+// app.use(express.urlencoded({ extended: true }));
 
 //Настройка выдачи статических файлов
 app.use('/dist', express.static('dist/'));
@@ -19,13 +24,14 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
+
 //Настройка порта сервера
 app.set('port', process.env.PORT || 8080);
 
 //Обработка корневого маршрута
 app.get('/', function (req, res) {
     //Отправляем файл страницы
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname + '/pages/index.html'));
 });
 
 app.get('/about', function (req, res) {
@@ -38,10 +44,19 @@ app.get('/contacts', function (req, res) {
     res.sendFile(path.join(__dirname + '/pages/contacts.html'));
 });
 
-app.get('/getUsers', (req, res) => {
+app.post('/login', (req, res) => {
+    let login = req.body.login;
+    let password = req.body.pass;
+    let userHash = crypto.createHash('md5').update(login + password).digest("hex");
+    if (usersDb.getData("/users").find(obj => obj.user === userHash)) {
+        return responseData = 'ok';
+        }
+    res.cookie('user', userHash);
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(users));
+    res.end(JSON.stringify(responseData));
 });
+
+
 
 app.get('/getProductsCount', (req, res, next) => {
     let products = (db.getData('/products'));
