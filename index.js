@@ -24,7 +24,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-
 //Настройка порта сервера
 app.set('port', process.env.PORT || 8080);
 
@@ -39,18 +38,14 @@ app.get('/about', function (req, res) {
     res.sendFile(path.join(__dirname + '/pages/about.html'));
 });
 
-app.get('/contacts', function (req, res) {
-    //Отправляем файл страницы
-    res.sendFile(path.join(__dirname + '/pages/contacts.html'));
-});
-
 app.post('/login', (req, res) => {
     let login = req.body.login;
     let password = req.body.pass;
     let userHash = crypto.createHash('md5').update(login + password).digest("hex");
-    if (usersDb.getData("/users").find(obj => obj.user === userHash)) {
-        return responseData = 'ok';
-        }
+    let user = usersDb.getData("/users").find(obj => obj.user === userHash);
+    let responseData = (!user)?
+        'err':
+        user.role;
     res.cookie('user', userHash);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(responseData));
