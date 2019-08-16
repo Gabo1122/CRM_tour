@@ -1,7 +1,7 @@
 class Login {
     constructor (id) {
         this.id = id;
-        this.template = `<main class="main-form">
+        this.template =  /*html*/`<main class="main-form">
             <form>
                 <div class="form-group">
                     <input type="text" class="form-control" id="login" name="userName" placeholder="Логин">

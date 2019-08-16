@@ -27,6 +27,7 @@ function nodemonStart(cb) {
 function browserSync(done) {
     browsersync.init({
         logPrefix: 'tour',
+        port: 5000,
         proxy: 'http://localhost:8080',
         notify: false
     });

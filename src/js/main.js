@@ -68,18 +68,18 @@ let List = function (id, className) {
     return this.$template;
 };
 
-window.onload = function () {
-    let login = (new Login());
-    document.body.insertAdjacentHTML('afterbegin', login.init());
-
-    function checkDOMChange() {
-        if (document.getElementsByTagName('button')) {
-            login.sendUserData();
-            return;
-        }
-        setTimeout( checkDOMChange, 100 );
-    }
-
-    checkDOMChange();
-};
+// window.onload = function () {
+//     let login = (new Login());
+//     document.body.insertAdjacentHTML('afterbegin', login.init());
+//
+//     function checkDOMChange() {
+//         if (document.getElementsByTagName('button')) {
+//             login.sendUserData();
+//             return;
+//         }
+//         setTimeout( checkDOMChange, 100 );
+//     }
+//
+//     checkDOMChange();
+// };
 
