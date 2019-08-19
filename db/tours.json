@@ -1,0 +1,49 @@
+{
+  "tours": [
+    {
+      "id": 1,
+      "manager": "tatyana",
+      "numberOfContract": 1,
+      "dateOfContract": "10.07.2019",
+      "customerLastName": "Петров",
+      "customerFirstname": "Виталий",
+      "customerMiddleName": "Викторович",
+      "countryOfTour": "Египет",
+      "dateStartTour": "22.07.2019",
+      "dateEndTour": "22.07.2019",
+      "numberOfTourists": 2,
+      "totalBYN": 1580,
+      "operatorTotal": 1450
+    },
+    {
+      "id": 2,
+      "manager": "tatyana",
+      "numberOfContract": 1,
+      "dateOfContract": "12.07.2019",
+      "customerLastName": "Иванов",
+      "customerFirstname": "Михаил",
+      "customerMiddleName": "Дмитриевич",
+      "countryOfTour": "Черногория",
+      "dateStartTour": "30.08.2019",
+      "dateEndTour": "09.09.2019",
+      "numberOfTourists": 3,
+      "totalBYN": 2160,
+      "operatorTotal": 1950
+    },
+    {
+      "id": 3,
+      "manager": "kseniya",
+      "numberOfContract": 1,
+      "dateOfContract": "14.07.2019",
+      "customerLastName": "Сидоров",
+      "customerFirstname": "Иван",
+      "customerMiddleName": "Иванович",
+      "countryOfTour": "Турция",
+      "dateStartTour": "20.10.2019",
+      "dateEndTour": "30.10.2019",
+      "numberOfTourists": 3,
+      "totalBYN": 3250,
+      "operatorTotal": 2870
+    }
+  ]
+}

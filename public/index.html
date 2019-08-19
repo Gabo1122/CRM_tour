@@ -50,13 +50,12 @@
                 xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
                 xhr.onreadystatechange = function () {
                     if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                        if (JSON.parse(xhr.responseText) === 'manager') {
+                        let user = JSON.parse(xhr.responseText);
+                        if (user !== 'err') {
+                            var userLogin = user;
                             document.getElementsByTagName('body')[0].innerHTML = '';
                             document.location.href = "/";
-                        } else if (JSON.parse(xhr.responseText) === 'admin'){
-                            document.getElementsByTagName('body')[0].innerHTML = '';
-                            document.location.href = "/";
-                        } else if (JSON.parse(xhr.responseText) === 'err') {
+                        } else if (user === 'err') {
                             alert('неправильный логин или пароль');
                         } else {
                             alert('ошибка сервера');
