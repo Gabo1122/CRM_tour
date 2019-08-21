@@ -70,7 +70,7 @@ let List = function (id, className) {
 
 window.onload = function () {
     let panel = (new AdminPanel());
-    document.body.insertAdjacentHTML('afterbegin', panel.init());
+    panel.init();
     //
     // function checkDOMChange() {
     //     if (document.getElementsByTagName('button')) {

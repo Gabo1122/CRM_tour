@@ -1,5 +1,5 @@
-class OrderList {
-    constructor () {
+class NewTour {
+    constructor() {
         this.template = `<main class="customer-form">
             <form>
                 <div class="form-group">
@@ -12,7 +12,9 @@ class OrderList {
             </form>
         </main>`;
     }
+
     init() {
-        return this.template;
+        document.getElementsByTagName('body')[0].innerHTML = this.template;
+        new Nav().init();
     }
 }

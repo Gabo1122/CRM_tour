@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Договор с туристом</title>
-</head>
-<body>
-
+class Print {
+    constructor() {
+        this.template = `
 <div>
     <p style="text-align: center"><strong>ДОГОВОР оказания туристических услуг 01/12-06-19</strong></p>
     <table style="width: 100%;">
@@ -347,7 +342,8 @@
         </tr>
     </table>
 
-    <br><br><br>
+    <br>
+    <p style="page-break-after:always"></p>
     <p style="text-align:right;">Приложение 2</p>
 
     <p style="text-align:right;">к договору оказания туристических услуг <strong>01/12-06-19 от 12 июня 2019г.</strong></p>
@@ -730,7 +726,11 @@ Connection; Corner room; Studio и других), то Заказчик обяз
             </td>
         </tr>
     </table>
-</div>
+</div>`;
+    }
 
-</body>
-</html>
+    newWindow() {
+        var newWin = window.open("", "Print tour", "width=600,height=600");
+        newWin.document.write(this.template);
+    }
+}

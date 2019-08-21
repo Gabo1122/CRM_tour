@@ -1,5 +1,5 @@
-class Form {
-    constructor () {
+class Tour {
+    constructor() {
         this.template = `<main class="customer-form">
             <form>
                 <div class="form-group">
@@ -12,6 +12,7 @@ class Form {
             </form>
         </main>`;
     }
+
     init() {
         return this.template;
     }

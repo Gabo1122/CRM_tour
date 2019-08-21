@@ -1,28 +1,13 @@
 class AdminPanel {
     constructor() {
         this.template = `
-            <header class="container-fluid">
+            
+            <main class="container-fluid">
                 <div class="row">
                    <div class="col">
-                    <p>Добрый день <span></span></p>
+                    <p>Добрый день <span class="user-name"></span></p>
                    </div>
                 </div>
-                <nav>
-                    
-                    <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Все туры</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Добавить тур</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"></a>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
-            <main class="container-fluid">
                 <div class="row">
                     <div class="col">
                         <table class="customers-all table">
@@ -40,43 +25,45 @@ class AdminPanel {
 
     init() {
         this.loadData();
-        return this.template;
     }
 
     loadData() {
-        let xhr = new XMLHttpRequest();
-        xhr.open("get", '/getAllData', true);
-        xhr.send();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                let data = JSON.parse(xhr.responseText);
-                if (data) {
-                    buildPanel(data);
-                } else {
-                    alert('ошибка сервера');
-                }
-            }
-        };
-
-        function buildPanel(data) {
-            console.log(data);
-            document.querySelector('header p span').textContent = data.user;
-            let rowTemplate = data.data.map(item => `
+        fetch('/getAllData')
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                this.buildPanel(data)
+            })
+            .catch(err => {
+                alert('ошибка сервера');
+            })
+    }
+    buildPanel(data) {
+        document.getElementsByTagName('body')[0].innerHTML = '';
+        document.body.insertAdjacentHTML('afterbegin', this.template);
+        document.querySelector('.user-name').innerHTML = data.user;
+        new Nav().init();
+        let rowTemplate = data.data.map(item => `
                 <tr>
                     <td>${item.id}</td>
                     <td>${item.dateOfContract}</td>
                     <td>${item.customerLastName}</td>
                     <td>${item.countryOfTour}</td>
                     <td>${item.dateStartTour}</td>
-                    <td><button class="btn btn-primary">подробнее</button> <button class="btn btn-secondary">печать</button></td>
+                    <td><button class="btn btn-primary" id="detail">подробнее</button> <button class="btn btn-secondary" id="print">печать</button></td>
                 </tr>`
-            );
-            for (let i = 0; i < rowTemplate.length; i++) {
-                document.querySelector('.customers-all tbody').insertAdjacentHTML('beforeend', rowTemplate[i]);
-            }
-
+        );
+        for (let i = 0; i < rowTemplate.length; i++) {
+            document.querySelector('.customers-all tbody').insertAdjacentHTML('beforeend', rowTemplate[i]);
         }
+        document.querySelector('#detail').addEventListener('click', function (e) {
+            e.preventDefault();
+            new Tour().init();
+        });
+        document.querySelector('#print').addEventListener('click', function (e) {
+            e.preventDefault();
+            new Print().newWindow();
+        });
     }
-
-
 }
