@@ -12,7 +12,7 @@
     <title>crm</title>
 </head>
 <body>
-<main class="main-form">
+<main class="login-form">
     <form>
         <div class="form-group">
             <input type="text" class="form-control" id="login" name="userName" placeholder="Логин">
@@ -32,8 +32,9 @@
                 sendUserData();
                 return;
             }
-            setTimeout( checkDOMChange, 100 );
+            setTimeout(checkDOMChange, 100);
         }
+
         checkDOMChange();
     };
 
@@ -44,25 +45,30 @@
             let login = document.getElementById("login").value;
             let pass = document.getElementById("password").value;
             if (login && pass) {
-                let xhr = new XMLHttpRequest();
-                let data = JSON.stringify({login: login, pass: pass});
-                xhr.open("POST", '/login', true);
-                xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-                xhr.onreadystatechange = function () {
-                    if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                        let user = JSON.parse(xhr.responseText);
-                        if (user !== 'err') {
-                            var userLogin = user;
-                            document.getElementsByTagName('body')[0].innerHTML = '';
-                            document.location.href = "/";
-                        } else if (user === 'err') {
-                            alert('неправильный логин или пароль');
-                        } else {
-                            alert('ошибка сервера');
-                        }
+                fetch('/login', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({login: login, pass: pass})
+                })
+                .then(res => {
+                    return res.json()
+                })
+                .then(user => {
+                    if (user !== 'err') {
+                        document.body.innerHTML = '';
+                        document.location.href = "/";
+                    } else if (user === 'err') {
+                        alert('неправильный логин или пароль');
+                    } else {
+                        alert('неверный ответ сервера');
                     }
-                };
-                xhr.send(data);
+                })
+                .catch(err => {
+                    alert('ошибка сервера');
+                });
             } else {
                 alert("Введите логин и пароль")
             }

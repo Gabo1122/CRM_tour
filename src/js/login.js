@@ -32,10 +32,10 @@ class Login {
                 xhr.onreadystatechange = function () {
                     if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                         if (JSON.parse(xhr.responseText) === 'manager') {
-                            document.getElementsByTagName('body')[0].innerHTML = '';
+                            document.body.innerHTML = '';
                             document.body.insertAdjacentHTML('afterbegin', new Newtour().init());
                         } else if (JSON.parse(xhr.responseText) === 'admin'){
-                            document.getElementsByTagName('body')[0].innerHTML = '';
+                            document.body.innerHTML = '';
                             document.body.insertAdjacentHTML('afterbegin', new AdminPanel().init());
                         } else if (JSON.parse(xhr.responseText) === 'err') {
                             alert('неправильный логин или пароль');

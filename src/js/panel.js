@@ -3,11 +3,7 @@ class AdminPanel {
         this.template = `
             
             <main class="container-fluid">
-                <div class="row">
-                   <div class="col">
-                    <p>Добрый день <span class="user-name"></span></p>
-                   </div>
-                </div>
+                
                 <div class="row">
                     <div class="col">
                         <table class="customers-all table">
@@ -40,9 +36,10 @@ class AdminPanel {
             })
     }
     buildPanel(data) {
-        document.getElementsByTagName('body')[0].innerHTML = '';
-        document.body.insertAdjacentHTML('afterbegin', this.template);
-        document.querySelector('.user-name').innerHTML = data.user;
+        document.body.innerHTML = this.template;
+        //document.querySelector('.user-name').innerHTML = data.user;
+        window.currentUser = data.user;
+        window.currentUserRole = data.userRole;
         new Nav().init();
         let rowTemplate = data.data.map(item => `
                 <tr>
@@ -57,11 +54,11 @@ class AdminPanel {
         for (let i = 0; i < rowTemplate.length; i++) {
             document.querySelector('.customers-all tbody').insertAdjacentHTML('beforeend', rowTemplate[i]);
         }
-        document.querySelector('#detail').addEventListener('click', function (e) {
+        document.querySelector('#detail').addEventListener('click', e => {
             e.preventDefault();
             new Tour().init();
         });
-        document.querySelector('#print').addEventListener('click', function (e) {
+        document.querySelector('#print').addEventListener('click', e => {
             e.preventDefault();
             new Print().newWindow();
         });

@@ -69,6 +69,8 @@ let List = function (id, className) {
 };
 
 window.onload = function () {
+    window.currentUser = 'noname';
+    window.currentUserRole = 'manager';
     let panel = (new AdminPanel());
     panel.init();
     //

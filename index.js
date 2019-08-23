@@ -37,7 +37,6 @@ function loadUser(req, res, next) {
 }
 
 app.get('/', loadUser, function (req, res) {
-    // currentUser.role === 'admin' ? console.log(currentUser.login): console.log(currentUser.login);
     res.sendFile(path.join(__dirname + '/public/main.html'));
 });
 
@@ -46,15 +45,10 @@ app.get('/about', loadUser, function (req, res) {
 });
 
 app.post('/login', (req, res) => {
-    let login = req.body.login;
-    let password = req.body.pass;
-    let userHash = crypto.createHash('md5').update(login + password).digest("hex");
+    let userHash = crypto.createHash('md5').update(req.body.login + req.body.pass).digest("hex");
     let user = usersDb.getData("/users").find(obj => obj.user === userHash);
     let responseData = 'err';
-    if (user && user.role === 'admin') {
-        res.cookie('user', userHash, { maxAge: 3600000, httpOnly: true });
-        responseData = user.login;
-    } else if (user && user.role === 'manager' || user.role === 'supermanager') {
+    if (user) {
         res.cookie('user', userHash, { maxAge: 3600000, httpOnly: true });
         responseData = user.login;
     }
@@ -71,11 +65,13 @@ app.get('/getAllData', loadUser, (req, res) => {
     if (req.user.role === 'admin' || req.user.role === 'supermanager') {
         res.end(JSON.stringify({
             "user": req.user.login,
+            "userRole": req.user.role,
             "data": db.getData('/tours')
         }));
     } else if (req.user.role === 'manager'){
         res.end(JSON.stringify({
             "user": req.user.login,
+            "userRole": req.user.role,
             "data": db.getData('/tours').filter(obj => obj.manager === req.user.login)
         }));
     }
