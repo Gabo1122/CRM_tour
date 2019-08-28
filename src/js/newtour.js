@@ -1,7 +1,7 @@
 class NewTour {
     constructor() {
         this.template = `
-        <header  class="container-fluid">
+        <header  class="container-fluid sticky-top bg-light">
             <nav class="row">
                 <p class="col m-3">
                     <button type="button" class="btn btn-success" id="save" >Сохранить</button> 
@@ -17,11 +17,6 @@ class NewTour {
                             <div class="card-header" id="heading1">
                                 <h4 data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
                                 Договор
-<!--                                // дата дог - сегодня по умолчанию-->
-<!--// № дог - по умолчанию номер за сегодня по порядку-->
-<!--// статус - это в описание тура Новая Ожидание подтв. ТО, Подтверждена ТО, Визовые формальности, Готов к туру, Прибыл из тура, Аннулирована-->
-<!--// менеджер - текущий (выбор для суперменеджера или админа, обычномку поле не показывать)-->
-<!--// вид услуги - турагент, туроператор, оформление визы-->
                                 </h4>
                             </div>
                             <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordionNewTour">
@@ -29,7 +24,7 @@ class NewTour {
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                             <lable>Дата договора
-                                            <input type="date" class="form-control" value="23.08.2019" name="contractDate" required>
+                                            <input type="date" class="form-control" value="" name="contractDate" required>
                                             </lable>
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -40,10 +35,20 @@ class NewTour {
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" name="customerFirstName" placeholder="FirstName">
+                                            <lable>Вид услуги
+                                                <select  class="form-control" name="service_type">
+                                                    <option value="touragent">турагент</option>
+                                                    <option value="touroperator">туроператор</option>
+                                                </select>
+                                            </lable>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" name="customerLastName" placeholder="LastName">
+                                        <div class="col-md-6 mb-3 manager">
+                                            <lable>Менеджер
+                                                <select  class="form-control" name="manager">
+                                                    <option value="manager_tatyana">Татьяна</option>
+                                                    <option value="manager_kseniya">Ксения</option>
+                                                </select>
+                                            </lable>
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +60,7 @@ class NewTour {
                                 Заказчик
                                 </h4>
                             </div>
-                            <div id="collapse2" class="collapse show" aria-labelledby="heading2" data-parent="#accordionNewTour">
+                            <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionNewTour">
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="col-md-4 mb-3">
@@ -70,10 +75,71 @@ class NewTour {
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" name="customerFirstName" placeholder="FirstName">
+                                            <input type="text" class="form-control" name="customerLastName" placeholder="LastName">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" name="customerLastName" placeholder="LastName">
+                                            <input type="text" class="form-control" name="customerFirstName" placeholder="FirstName">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                            <lable>Дата рождения
+                                            <input type="date" class="form-control" value="" name="DateOfBirth">
+                                            </lable>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <lable>Гражданство
+                                            <input type="text" class="form-control" value="РБ" name="citizenship">
+                                            </lable>
+                                        </div>
+                                    </div>
+                                     <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <lable>Документ
+                                                <select  class="form-control" name="passport">
+                                                    <option value="passport">Паспорт</option>
+                                                    <option value="vid">Вид на жительство</option>
+                                                </select>
+                                            </lable>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <lable>Серия/номер
+                                            <input type="text" class="form-control" name="passportNumber">
+                                            </lable>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <lable>Личный номер
+                                            <input type="text" class="form-control" name="IDNumber">
+                                            </lable>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <lable>Дата выдачи 
+                                            <input type="date" class="form-control" name="DateOfIssue">
+                                            </lable>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <lable>Срок действия
+                                            <input type="date" class="form-control"  name="DateOfExpiry">
+                                            </lable>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <lable>Кем выдан
+                                            <input type="text" class="form-control" name="issuedBy">
+                                            </lable>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                            <lable>Адрес регистрации
+                                            <input type="text" class="form-control" name="address">
+                                            </lable>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <lable>Телефон
+                                            <input type="text" class="form-control" name="phone">
+                                            </lable>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +153,8 @@ class NewTour {
                             </div>
                             <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionNewTour">
                                 <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                ${new Tourist().add()}
+                                <button type="button" class="btn btn-primary" id="add-tourist" >Добавить туриста</button>
                                 </div>
                             </div>
                         </div>
@@ -124,6 +191,11 @@ class NewTour {
     init() {
         document.body.innerHTML = this.template;
         document.getElementsByName('contractDate')[0].valueAsDate = new Date();
+        if (window.currentUserRole === 'manager') {
+            let managerSelect = document.querySelector('.manager');
+            managerSelect.style = 'display:none;';
+            managerSelect.value = window.currentUser;
+        }
         document.querySelector('#save').addEventListener('click', e => {
             e.preventDefault();
             this.addNewTour();
