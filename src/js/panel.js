@@ -36,8 +36,8 @@ class AdminPanel {
             })
     }
     buildPanel(data) {
+        console.log(data);
         document.body.innerHTML = this.template;
-        //document.querySelector('.user-name').innerHTML = data.user;
         window.currentUser = data.user;
         window.currentUserRole = data.userRole;
         new Nav().init();

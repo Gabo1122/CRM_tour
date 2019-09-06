@@ -1,12 +1,33 @@
 class NewTour {
     constructor() {
+        this.currentUserRole = (window.currentUserRole === 'admin')? 'Администратор': (window.currentUserRole === 'manager')? 'менеджер': (window.currentUserRole === 'supermanager')? 'Суперменеджер': 'noRole';
+        this.touristNumber = 1;
         this.template = `
-        <header  class="container-fluid sticky-top bg-light">
-            <nav class="row">
-                <p class="col m-3">
-                    <button type="button" class="btn btn-success" id="save" >Сохранить</button> 
-                    <button type="button" class="btn btn-outline-danger" id="cancel">Отменить</button>
-                </p>
+        <header>
+            <div class="container">
+                <div class="row">
+                   <div class="col">
+                    <p class="m-1"><small>Добрый день: <span class="user-role">${this.currentUserRole}</span> - <span class="user-name">${window.currentUser}</span></small></p>
+                   </div>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg bg-info">
+                <div class="container">
+                    <a class="navbar-brand" href="#">CRM-tour</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                             <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                        </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" id="back-to-all" href="#">Все туры</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="delete-tour" href="#">Удалить тур</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
         </header>
         <main class="container-fluid">
@@ -64,39 +85,49 @@ class NewTour {
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="col-md-4 mb-3">
-                                            <input type="text" class="form-control" name="customerFirstNameRu" placeholder="Фамилия/Название организации" required>
+                                            <lable>Фамилия/Название организации
+                                            <input type="text" class="form-control" name="customerFirstNameRu" required>
+                                        </lable>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <input type="text" class="form-control" name="customerLastNameRu" placeholder="Имя">
+                                            <lable>Имя
+                                            <input type="text" class="form-control" name="customerLastNameRu">
+                                            </lable>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <input type="text" class="form-control" name="customerMiddleNameRu" placeholder="Отчество">
+                                            <lable>Отчество
+                                            <input type="text" class="form-control" name="customerMiddleNameRu">
+                                            </lable>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" name="customerLastName" placeholder="LastName">
+                                            <lable>LastName
+                                            <input type="text" class="form-control" name="customerLastName">
+                                            </lable>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" name="customerFirstName" placeholder="FirstName">
+                                            <lable>FirstName
+                                            <input type="text" class="form-control" name="customerFirstName">
+                                            </lable>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                             <lable>Дата рождения
-                                            <input type="date" class="form-control" value="" name="DateOfBirth">
+                                            <input type="date" class="form-control" value="" name="customerDateOfBirth">
                                             </lable>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <lable>Гражданство
-                                            <input type="text" class="form-control" value="РБ" name="citizenship">
+                                            <input type="text" class="form-control" value="РБ" name="customerCitizenship">
                                             </lable>
                                         </div>
                                     </div>
                                      <div class="form-row">
                                         <div class="col-md-4 mb-3">
                                             <lable>Документ
-                                                <select  class="form-control" name="passport">
+                                                <select  class="form-control" name="customerPassport">
                                                     <option value="passport">Паспорт</option>
                                                     <option value="vid">Вид на жительство</option>
                                                 </select>
@@ -104,41 +135,41 @@ class NewTour {
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <lable>Серия/номер
-                                            <input type="text" class="form-control" name="passportNumber">
+                                            <input type="text" class="form-control" name="customerPassportNumber">
                                             </lable>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <lable>Личный номер
-                                            <input type="text" class="form-control" name="IDNumber">
+                                            <input type="text" class="form-control" name="customerIDNumber">
                                             </lable>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-4 mb-3">
                                             <lable>Дата выдачи 
-                                            <input type="date" class="form-control" name="DateOfIssue">
+                                            <input type="date" class="form-control" name="customerDateOfIssue">
                                             </lable>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <lable>Срок действия
-                                            <input type="date" class="form-control"  name="DateOfExpiry">
+                                            <input type="date" class="form-control"  name="customerDateOfExpiry">
                                             </lable>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <lable>Кем выдан
-                                            <input type="text" class="form-control" name="issuedBy">
+                                            <input type="text" class="form-control" name="customerIssuedBy">
                                             </lable>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                             <lable>Адрес регистрации
-                                            <input type="text" class="form-control" name="address">
+                                            <input type="text" class="form-control" name="customerAddress">
                                             </lable>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <lable>Телефон
-                                            <input type="text" class="form-control" name="phone">
+                                            <input type="text" class="form-control" name="customerPhone">
                                             </lable>
                                         </div>
                                     </div>
@@ -153,14 +184,17 @@ class NewTour {
                             </div>
                             <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionNewTour">
                                 <div class="card-body">
-                                ${new Tourist().add()}
-                                <button type="button" class="btn btn-primary" id="add-tourist" >Добавить туриста</button>
+                                    <div class="tourists-count mb-3">Количество туристов: 1</div>
+                                    <div class="tourists-list">
+                                    ${new Tourist(1).add()}
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="add-tourist" >Добавить туриста</button>
                                 </div>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-header" id="heading4">
-                                <h4 class="mb-0" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                <h4 data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
                                 Тур
                                 </h4>
                             </div>
@@ -196,17 +230,51 @@ class NewTour {
             managerSelect.style = 'display:none;';
             managerSelect.value = window.currentUser;
         }
-        document.querySelector('#save').addEventListener('click', e => {
-            e.preventDefault();
-            this.addNewTour();
+        document.querySelector('#delete-tour').addEventListener('click', e => {
+            this.deleteTour();
         });
-        document.querySelector('#cancel').addEventListener('click', e => {
-            e.preventDefault();
+        document.querySelector('#back-to-all').addEventListener('click', e => {
             new AdminPanel().init();
+        });
+        document.querySelector('#add-tourist').addEventListener('click', e => {
+            this.addTourist();
+        });
+        document.querySelector('.tourists-list').addEventListener('click', e => {
+            if (e.target.id.slice(0, 11) === 'del-tourist') {
+                if (this.touristNumber === 1) {
+                    alert('Невозможно сделать тур без туристов');
+                } else {
+                    let confirmDel = confirm('Вы действительно хотите удалить этого туриста?');
+                    if (confirmDel === true) {
+                        this.deleteTourist(e.target.id.slice(11, 12));
+                    }
+
+                }
+            }
+
+        });
+        document.querySelector('.customer-form').addEventListener('change', e => {
+            console.log(e.target.name, e.target.value);
         });
     }
 
-    addNewTour() {
+    deleteTourist(n) {
+        document.querySelector(`#tourist-${n}`).remove();
+        this.touristsCount();
+    }
+
+    addTourist() {
+        this.touristNumber++;
+        document.querySelector('.tourists-list').insertAdjacentHTML('beforeend', new Tourist(this.touristNumber).add());
+        this.touristsCount();
+    }
+
+    touristsCount() {
+        let touristsCount = document.querySelectorAll('.tourist-block').length;
+        document.querySelector('.tourists-count').innerHTML = `Количество туристов: ${touristsCount}`;
+    }
+
+    deleteTour() {
         console.log(1);
     }
 }
@@ -245,12 +313,9 @@ class NewTour {
 // // Гражданство
 // // паспорт / вид на жительство
 // // серия/номер
-// // личный номер
 // // дата выдачи
 // // срок действия
-// // кем выдан
-// // Адрес
-// // Телефон
+
 // Туристы 2, 3 ,4............ кнопка добавить туриста
 
 // Блок - Тур

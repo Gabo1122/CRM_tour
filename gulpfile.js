@@ -10,8 +10,6 @@ const rename = require("gulp-rename");
 const sass = require("gulp-sass");
 const uglify = require('gulp-uglifyjs');
 
-// NodemonStart
-// Таск для старта Nodemon - автоматическая перезагрузка сервера
 function nodemonStart(cb) {
     let callbackCalled = false;
     return nodemon({script: './index.js'}).on('start', function () {
@@ -22,8 +20,6 @@ function nodemonStart(cb) {
     });
 }
 
-// BrowserSync
-// Таск для автоматической перезагрузки бразуера при изменениях
 function browserSync(done) {
     browsersync.init({
         logPrefix: 'tour',
@@ -34,13 +30,11 @@ function browserSync(done) {
     done();
 }
 
-// BrowserSync Reload
 function browserSyncReload(done) {
     browsersync.reload();
     done();
 }
 
-// CSS task
 function css() {
     return gulp
         .src("./src/sass/**/*.sass")
@@ -79,6 +73,8 @@ function cssLibs() {
     return gulp
         .src([
             './node_modules/bootstrap/dist/css/bootstrap.min.css',
+            './src/css/now-ui-kit.css',
+            './node_modules/@fortawesome/fontawesome-free/css/all.css'
         ])
         .pipe(concat('libs.css'))
         .pipe(plumber())
@@ -86,7 +82,6 @@ function cssLibs() {
         .pipe(gulp.dest('./dist/css/'))
 }
 
-// Watch files
 function watchFiles() {
     gulp.watch("./src/sass/**/*", css);
     gulp.watch("./src/js/**/*", js);
@@ -95,11 +90,9 @@ function watchFiles() {
     gulp.watch("./index.js", browserSyncReload)
 }
 
-// define complex tasks
 const build = gulp.parallel(cssLibs, jsLibs, js, css);
 const watch = gulp.parallel(cssLibs, jsLibs, js, css, watchFiles, nodemonStart, browserSync);
 
-// export tasks
 exports.css = css;
 exports.cssLibs = cssLibs;
 exports.jsLibs = jsLibs;
