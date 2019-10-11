@@ -73,7 +73,6 @@ function cssLibs() {
     return gulp
         .src([
             './node_modules/bootstrap/dist/css/bootstrap.min.css',
-            './src/css/now-ui-kit.css',
             './node_modules/@fortawesome/fontawesome-free/css/all.css'
         ])
         .pipe(concat('libs.css'))

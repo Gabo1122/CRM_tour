@@ -49,7 +49,7 @@ app.post('/login', (req, res) => {
     let user = usersDb.getData("/users").find(obj => obj.user === userHash);
     let responseData = 'err';
     if (user) {
-        res.cookie('user', userHash, { maxAge: 3600000, httpOnly: true });
+        res.cookie('user', userHash, { maxAge: 28800000, httpOnly: true });
         responseData = user.login;
     }
     res.writeHead(200, {'Content-Type': 'application/json'});
